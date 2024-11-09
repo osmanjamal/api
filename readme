@@ -1,0 +1,130 @@
+# قاعدة البيانات
+DATABASE_URL="postgresql://osman:osman@localhost:5432/trading_platform"
+
+# الأمان
+JWT_SECRET="your-super-secret-key-here"
+ENCRYPTION_KEY="your-32-character-encryption-key-here"
+
+# Binance API
+NEXT_PUBLIC_BINANCE_API_URL="https://api.binance.com"
+NEXT_PUBLIC_BINANCE_TESTNET_API_URL="https://testnet.binance.vision"
+
+# المكتبات الأساسية
+npm install @prisma/client bcryptjs jsonwebtoken lucide-react class-variance-authority crypto-js
+
+# مكتبات التطوير
+npm install -D prisma @types/bcryptjs @types/jsonwebtoken @types/crypto-js
+
+# تهيئة Prisma
+npx prisma init
+
+# إنشاء أول migration
+npx prisma migrate dev --name init
+
+# توليد Prisma Client
+npx prisma generate
+
+
+# في Windows
+# افتح SQL Shell (psql) وقم بإنشاء قاعدة البيانات
+CREATE DATABASE trading_platform;
+
+# في Linux/Mac
+sudo -u postgres psql
+CREATE DATABASE trading-platform;
+
+npm run dev
+
+psql -U postgres -d trading-platform
+
+1. الأوامر الأساسية في PostgreSQL
+الدخول إلى قاعدة البيانات:
+
+bash
+Copy code
+psql -U postgres -d trading-platform
+استبدل database_name باسم قاعدة البيانات التي تريد الوصول إليها.
+
+عرض جميع قواعد البيانات:
+
+sql
+Copy code
+\l
+عرض جميع الجداول داخل قاعدة البيانات الحالية:
+
+sql
+Copy code
+\dt
+عرض جميع المستخدمين والأدوار:
+
+sql
+Copy code
+\du
+عرض تفاصيل هيكل جدول معين:
+
+sql
+Copy code
+\d table_name
+استبدل table_name باسم الجدول الذي تريد فحص هيكله.
+
+2. إدارة المستخدمين والصلاحيات
+إضافة مستخدم جديد:
+
+sql
+Copy code
+CREATE USER username WITH PASSWORD 'password';
+إعطاء صلاحيات لمستخدم على قاعدة بيانات:
+
+sql
+Copy code
+GRANT ALL PRIVILEGES ON DATABASE database_name TO username;
+تعديل صلاحيات مستخدم:
+
+sql
+Copy code
+ALTER USER username WITH SUPERUSER;
+3. إعداد مشروع باستخدام أوامر PostgreSQL (مثل Prisma أو Django)
+إذا كان مشروعك يعتمد على أداة مثل Prisma أو Django، فستحتاج إلى أوامر محددة لتكوين أو ترحيل قاعدة البيانات:
+
+ترحيل قاعدة البيانات في Prisma:
+
+bash
+Copy code
+npx prisma migrate dev --name migration_name
+استبدل migration_name باسم الترحيل.
+إنشاء وترحيل قاعدة البيانات في Django:
+
+bash
+Copy code
+python manage.py makemigrations
+python manage.py migrate
+4. نسخ واستعادة قواعد البيانات
+أخذ نسخة احتياطية لقاعدة بيانات:
+
+bash
+Copy code
+pg_dump -U postgres database_name > database_backup.sql
+استعادة قاعدة بيانات من نسخة احتياطية:
+
+bash
+Copy code
+psql -U postgres -d database_name < database_backup.sql
+5. الأوامر المتقدمة لتحسين الأداء
+تحليل أداء استعلام: استخدم EXPLAIN لرؤية كيفية تنفيذ PostgreSQL للاستعلام.
+
+sql
+Copy code
+EXPLAIN ANALYZE SELECT * FROM table_name WHERE condition;
+تنظيف قاعدة البيانات من البيانات غير الضرورية:
+
+sql
+Copy code
+VACUUM FULL;
+ملاحظة
+لإدارة المشاريع، يمكنك أيضًا إعداد سكربت لتشغيل الأوامر التي تتكرر بشكل آلي، ويساعدك pgAdmin إذا كنت تفضل واجهة رسومية بدلًا من الأوامر.
+
+
+
+
+
+
